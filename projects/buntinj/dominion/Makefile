@@ -86,6 +86,24 @@ unittestresults.out: dominion.o rngs.o unittest1 unittest2 unittest3 unittest4 c
 	echo "cardEffect stats" >> unittestresults.out
 	gcov -abcfu dominion .c | sed -n '/cardEffect/{n;p; n;p; n;p; n;p;}' >> unittestresults.out
 
+randomtestcard1.out: randomtestcard1.c dominion.o rngs.o
+	gcc -o randomtestcard1 -g randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard1 &> randomtestcard1.out
+	echo "cardEffect stats" >> randomtestcard1.out
+	gcov -abcfu dominion.c | sed -n '/cardEffect/{n;p; n;p; n;p; n;p}' >> randomtestcard1.out
+
+randomtestcard2.out: randomtestcard2.c dominion.o rngs.o
+	gcc -o randomtestcard2 -g randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	./randomtestcard2 &> randomtestcard2.out
+	echo "cardEffect stats" >> randomtestcard2.out
+	gcov -abcfu dominion.c | sed -n '/cardEffect/{n;p; n;p; n;p; n;p}' >> randomtestcard2.out
+
+randomtestadventurer.out: randomtestadventurer.c dominion.o rngs.o
+	gcc -o randomtestadventurer -g randomtestadventurer.c dominion.o rngs.o $(CFLAGS)
+	./randomtestadventurer &> randomtestadventurer.out
+	echo "Adventurer stats" >> randomtestadventurer.out
+	gcov -abcfu dominion.c | sed -n '/Adventurer/{n;p; n;p; n;p; n;p}' >> randomtestadventurer.out
+
 all: playdom player testDrawCard testBuyCard badTestDrawCard
 
 clean:
