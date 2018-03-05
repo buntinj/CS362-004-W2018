@@ -1,0 +1,45 @@
+Smithy Draws Four Cards Instead of Three Cards
+Bug in dominion code.
+This is a serious bug that will greatly impact the play of the game.
+This bug occurs every time the smithy code is run.
+While testing the smith card with a unit test, it revealed that when the game rules expect
+smithy to draw three cards from the deck, it instead draws four.
+This was discovered by running cardtest1 as it checks the number of cards in the
+hand before and after the card effect is run. They should be different by exactly
+three cards given the unit test parameters.
+This bug occurs every time the smithy code is run, so it can be reproduced by simply running the smithy card effect.
+This error is likely a result of the conditional in the for loop on line 1362 of
+dominion.c ocurring in the smithy_card function.
+
+Great Hall Doesn't Draw Any Cards
+Bug in dominion code.
+This is a serious bug that will impact the way the game is played.
+This bug occurs every time the great hall code is run.
+While testing the great hall card effect with a unit test, it revealed that when the game rules expect
+it to draw one card from the deck, it instead doesn't draw any.
+This was discovered by running cardtest2 as it checks the number of cards in the
+hand before and after the card effect is run. They should be different by exactly
+one card given the unit test parameters.
+This bug occurs every time the great hall code is run, so it can be reproduced by
+simply running the great hall card effect.
+This error is likely a result of the draw statement being commented out on line 1415 of
+dominion.c ocurring in the great_hall_card function.
+
+isGameOver Fails to End the Game Based on the Last Two Card Supplies
+Bug in dominion code.
+This is a serious bug that will impact the way the game is played.
+This bug occurs when the game is supposed to end because sea hag and treasure map
+supply counts are empty along with any one other card supply count. The game is supposed
+to end if three supplycounts are empty, however it doesn't take the supply counts of
+treasure map and sea hag into account.
+While testing the isGameOver function with a unit test, it revealed that when the game rules expect
+the game to end when the last two supply counts are zero and one other card is zero it
+will not actually end the game.
+This was discovered by running unittest4 as it check the isGameOver function with the last
+three supplycounts set to zero. The game should end as the rules state that the game ends when
+three cards supplies are empty.
+This bug occurs when ever the game ending conditions involve the last two cards, treasure map or sea hag,
+and thus is easiest to reproduce by setting the supply counts of the last three cards to 0 and all others equal
+to at least one and then running the isGameOver function.
+This error is likely a result of the conditional in the for loop on line 402 of
+dominion.c ocurring in the isGameOver function.
