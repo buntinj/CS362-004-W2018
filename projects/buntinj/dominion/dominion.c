@@ -644,7 +644,7 @@ int getCost(int cardNumber)
 }
 
 int Adventurer(int drawntreasure, int cardDrawn,int z,struct gameState *state, int currentPlayer, int temphand[]){
-	while(drawntreasure<3){
+	while(drawntreasure<2){
 		if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
 	 		shuffle(currentPlayer, state);
 		}
@@ -719,7 +719,7 @@ int Remodel(struct gameState *state,int currentPlayer,int choice1,int choice2, i
 int Smithy(struct gameState *state,int currentPlayer,int handPos){
 	int i;
 	//+3 Cards
-	for (i = 0; i < 4; i++){
+	for (i = 0; i < 3; i++){
  		drawCard(currentPlayer, state);
 	}			
 
@@ -740,8 +740,7 @@ int Village(struct gameState *state,int currentPlayer,int handPos){
 	return 0;
 }
 
-	int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus)
-{
+int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState *state, int handPos, int *bonus){
   int i;
   int j;
   int k;
